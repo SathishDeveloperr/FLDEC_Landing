@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain Effect</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            background-color: #0e0e0e; /* Dark background to make the rain visible */
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="rain-canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('rain-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set the canvas size to the full screen
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Array to store the raindrops
+        const raindrops = [];
+
+        // Create raindrop objects with random properties
+        function createRaindrop() {
+            return {
+                x: Math.random() * canvas.width, // X position
+                y: Math.random() * canvas.height, // Y position
+                length: Math.random() * 20 + 10, // Length of the raindrop
+                speed: Math.random() * 4 + 2,    // Speed of the raindrop
+                opacity: Math.random() * 0.5 + 0.1 // Opacity of the raindrop
+            };
+        }
+
+        // Draw a raindrop on the canvas
+        function drawRaindrop(drop) {
+            ctx.beginPath();
+            ctx.moveTo(drop.x, drop.y);
+            ctx.lineTo(drop.x, drop.y + drop.length);
+            ctx.strokeStyle = `rgba(174, 194, 224, ${drop.opacity})`; // Light blue color
+            ctx.lineWidth = 1;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        }
+
+        // Update the position of the raindrop for animation
+        function updateRaindrop(drop) {
+            drop.y += drop.speed; // Move the raindrop down by its speed
+            if (drop.y > canvas.height) {
+                // If the raindrop goes off the screen, reset its position
+                drop.x = Math.random() * canvas.width;
+                drop.y = -drop.length;
+            }
+        }
+
+        // Animate the rain effect
+        function animateRain() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+            raindrops.forEach(drop => {
+                drawRaindrop(drop);  // Draw each raindrop
+                updateRaindrop(drop); // Update its position
+            });
+
+            requestAnimationFrame(animateRain); // Call animateRain continuously
+        }
+
+        // Populate the raindrops array with raindrop objects
+        for (let i = 0; i < 500; i++) {
+            raindrops.push(createRaindrop());
+        }
+
+        // Start the rain animation
+        animateRain();
+    </script>
+</body>
+</html>
