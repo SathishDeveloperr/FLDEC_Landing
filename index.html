@@ -24,7 +24,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle, rgba(0, 0, 0, 0.144) 60%, rgba(15, 14, 14, 0.158) 100%);
+            background: radial-gradient(circle, rgba(3, 3, 3, 0) 60%, rgba(0, 0, 0, 0.425) 100%);
             pointer-events: none; /* Allows interaction with the rain */
             z-index: 1; /* Place vignette on top of the background but under the canvas */
         }
@@ -42,7 +42,7 @@
 
 <body>
 
-	<div class="logo" style="background-image: url('img/Logo.png');"></div>
+	<div class="logo" style="background-image: url('img/Logo.png');filter: contrast(100%);filter: brightness(120%);"></div>
 
 	<section class="layers">
 		<div class="layers__container">
@@ -54,7 +54,7 @@
 					<h1 class="heading">FLDEC <span>Landing</span></h1>
 					<div class="hero-content__p">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
 						neque?</div>
-					<button class="button-start">Start</button>
+					<button class="button-start" >Start</button>
 				</div>
 			</div>
 			<div class="layers__item layer-4">
